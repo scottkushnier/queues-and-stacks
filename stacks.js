@@ -1,31 +1,43 @@
 class Stack {
   constructor() {
     {
-      this.top = null;
+      this.first = null;
+      this.last = null;
+      this.size = 0;
     }
   }
-  push(el) {
-    const node = { el: el, next: this.top };
-    this.top = node;
+  push(val) {
+    const node = { val: val, next: this.first };
+    if (!this.first) {
+      this.last = { val: val };
+    }
+    this.first = node;
+    this.size++;
+    return undefined;
   }
   pop() {
-    if (this.top) {
-      const ret = this.top.el;
-      this.top = this.top.next;
+    if (this.first) {
+      const ret = this.first.val;
+      this.first = this.first.next;
+      if (!this.first) {
+        this.last = null;
+      }
+      this.size--;
       return ret;
     } else {
-      console.log("error: tried to pop from empty stack");
-      return null;
+      throw new Error("error: tried to pop from empty stack");
     }
   }
   peek() {
-    if (this.top) {
-      return this.top.el;
+    if (this.first) {
+      return this.first.val;
     } else {
       return null;
     }
   }
   isEmpty() {
-    return this.top == null;
+    return this.first == null;
   }
 }
+
+module.exports = Stack;
