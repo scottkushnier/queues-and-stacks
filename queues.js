@@ -24,7 +24,7 @@ class Queue {
       this.front = this.front.next;
       return ret;
     } else {
-      console.log("error tried to dequeue from empty queue");
+      console.log("error: tried to dequeue from empty queue");
       return null;
     }
   }
